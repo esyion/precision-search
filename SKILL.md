@@ -1,6 +1,6 @@
 ---
 name: precision-search
-description: 精确搜索方法论：给搜索词加结构锚点（如 `fn\(`、`"key":`、`<Comp`、`@user`、`^ERROR`）替代裸词 grep，一次命中、大幅降噪。任何搜索、查找、定位任务都适用——代码、文档、日志、配置、数据文件不限；只要第一步是搜索，就先读本 skill。Use for ANY search: grep, rg, find usages, callers, logs, docs.
+description: '精确搜索方法论：给搜索词加结构锚点（如 `fn\(`、`"key":`、`<Comp`、`@user`、`^ERROR`）替代裸词 grep，一次命中、大幅降噪。任何搜索、查找、定位任务都适用——代码、文档、日志、配置、数据文件不限；只要第一步是搜索，就先读本 skill。Use for ANY search: grep, rg, find usages, callers, logs, docs.'
 ---
 
 # 精确搜索：语法锚点法

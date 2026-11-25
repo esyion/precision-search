@@ -47,7 +47,15 @@ The full reference — universal anchors, per-language definition patterns, the 
 
 ## Install
 
-Copy the skill into your Claude Code skills directory:
+One command, any agent:
+
+```bash
+npx skills add esyion/precision-search
+```
+
+The [skills CLI](https://github.com/vercel-labs/skills) detects your installed agents — Claude Code, Codex, Cursor, OpenCode and 75+ more — and installs the skill where each one expects it. Add `-g` to install globally instead of into the current project.
+
+Prefer manual? Copy `SKILL.md` to where your agent keeps skills:
 
 ```bash
 git clone https://github.com/esyion/precision-search.git
@@ -55,11 +63,9 @@ mkdir -p ~/.claude/skills/precision-search
 cp precision-search/SKILL.md ~/.claude/skills/precision-search/SKILL.md
 ```
 
-On Windows, use `%USERPROFILE%\.claude\skills\precision-search\` instead of `~/.claude/...`.
+On Windows, use `%USERPROFILE%\.claude\skills\precision-search\`. For Codex CLI the same file goes to `~/.codex/skills/precision-search/`; any agent that reads the [Agent Skills](https://agentskills.io) format follows the same pattern.
 
-That's it. The skill activates automatically: whenever Claude's first step on a task is a search — grep, `rg`, find usages, callers, log triage, config lookup — it reads the skill first and searches with anchors. You can also invoke it explicitly with `/precision-search`.
-
-Works with any coding agent that supports the [Agent Skills](https://agentskills.io) format — not just Claude Code.
+That's it. The skill activates automatically: whenever the agent's first step on a task is a search — grep, `rg`, find usages, callers, log triage, config lookup — it reads the skill first and searches with anchors. In Claude Code you can also invoke it explicitly with `/precision-search`.
 
 ## Two rules of thumb
 

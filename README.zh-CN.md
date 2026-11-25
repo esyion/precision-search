@@ -47,7 +47,15 @@ src/config/retry.ts:22 * ...maxRetries may never exceed maxRetriesLimit ← 前�
 
 ## 安装
 
-把 skill 拷进 Claude Code 的 skills 目录：
+一条命令，任何 agent：
+
+```bash
+npx skills add esyion/precision-search
+```
+
+[skills CLI](https://github.com/vercel-labs/skills) 会自动检测你装过的 agent——Claude Code、Codex、Cursor、OpenCode 等 75+——并把 skill 安装到各自期待的目录。加 `-g` 可全局安装（默认装到当前项目）。
+
+偏好手动？把 `SKILL.md` 拷到你所用 agent 存放 skills 的目录：
 
 ```bash
 git clone https://github.com/esyion/precision-search.git
@@ -55,11 +63,9 @@ mkdir -p ~/.claude/skills/precision-search
 cp precision-search/SKILL.md ~/.claude/skills/precision-search/SKILL.md
 ```
 
-Windows 上把 `~/.claude/...` 换成 `%USERPROFILE%\.claude\skills\precision-search\`。
+Windows 上把 `~/.claude/...` 换成 `%USERPROFILE%\.claude\skills\precision-search\`；Codex CLI 则放到 `~/.codex/skills/precision-search/`；任何读取 [Agent Skills](https://agentskills.io) 规范的工具同理。
 
-装完即生效，无需配置：只要任务的第一步是搜索——grep、`rg`、找用法、找调用方、日志排查、配置定位——Claude 会先读这个 skill 再搜。也可以用 `/precision-search` 手动触发。
-
-支持任何实现了 [Agent Skills](https://agentskills.io) 规范的编码 agent，不限于 Claude Code。
+装完即生效，无需配置：只要任务的第一步是搜索——grep、`rg`、找用法、找调用方、日志排查、配置定位——agent 会先读这个 skill 再搜。Claude Code 里也可以用 `/precision-search` 手动触发。
 
 ## 两条铁律
 
