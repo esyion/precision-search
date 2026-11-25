@@ -1,0 +1,16 @@
+2026-11-25 02:05:11 INFO  http server listening on :8080
+2026-11-25 02:05:12 INFO  db pool ready (size=20)
+2026-11-25 02:07:44 INFO  job kyc-check started run=9812
+2026-11-25 02:09:02 WARN  slow query: 1240ms sql="SELECT * FROM tasks WHERE status='running'"
+2026-11-25 02:11:36 INFO  job welcome-email completed run=9801
+2026-11-25 02:12:40 INFO  retrying request attempt=1 url=/api/processes
+2026-11-25 02:13:47 ERROR connection refused dialing db.primary:5432 err=ECONNREFUSED
+2026-11-25 02:13:48 INFO  retry scheduled in 500ms
+2026-11-25 02:13:49 INFO  db reconnected after 2 attempts
+2026-11-25 02:18:22 INFO  job kyc-check completed run=9812
+2026-11-25 02:24:09 WARN  queue depth above threshold depth=412
+2026-11-25 02:24:10 WARN  upstream flapping; previous incident was connection refused at 01:44 (see INC-2207)
+2026-11-25 02:31:55 INFO  http request method=POST path=/processes/refund/start status=201
+2026-11-25 02:40:03 ERROR out of memory: worker 3 killed (rss=1.9GiB)
+2026-11-25 02:40:04 WARN  worker restart triggered
+2026-11-25 02:44:51 INFO  deployment v2026.11.25-rc3 rolled out

@@ -1,0 +1,84 @@
+{
+  "skill_name": "precision-search",
+  "evals": [
+    {
+      "id": 0,
+      "name": "startprocess-callers",
+      "fixture": "codebase",
+      "prompt": "In evals/fixtures/codebase, find every place that CALLS startProcess (file and line number). Calls only - not its definition. The repo README also mentions it; that does not count.",
+      "expected_output": "All 5 call sites: src/index.ts:13, src/task-engine.ts:26 (recursive), src/routes.ts:8, test/task-engine.test.ts:6 and :11. Definition src/task-engine.ts:16 must not be listed. README.md:8 mention must not be listed.",
+      "traps": [
+        "definition line looks like a call (startProcess( at src/task-engine.ts:16)",
+        "README.md:8 mentions startProcess without parens",
+        "import lines mention the name"
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "usercard-renders",
+      "fixture": "codebase",
+      "prompt": "In evals/fixtures/codebase, find every place where the UserCard component is RENDERED in JSX (file and line number). Imports, the definition, type references and plain strings do not count as renders.",
+      "expected_output": "3 render sites: src/features/Dashboard.tsx:14, src/features/Profile.tsx:9, src/features/Admin.tsx:11. Not renders: definition UserCard.tsx:11, UserCardSkeleton.tsx (prefix trap) incl. Profile.tsx:5, Feed.tsx import + 'UserCard' string.",
+      "traps": [
+        "UserCardSkeleton is a prefix of UserCard (<UserCard prefix-matches <UserCardSkeleton)",
+        "Feed.tsx imports UserCard and has the string 'UserCard' but never renders it",
+        "definition and interface mention the name"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "dbconnection-instantiations",
+      "fixture": "codebase",
+      "prompt": "In evals/fixtures/codebase, find every place that instantiates DatabaseConnection with new (file and line number). Imports, type annotations, comments and the class definition do not count.",
+      "expected_output": "3 instantiations: src/index.ts:9, src/db/migrator.ts:9, src/db/pool.ts:14. Not instantiations: class definition connection.ts:6, comment mention pool.ts:6, type annotations and imports.",
+      "traps": [
+        "pool.ts:6 comment mentions DatabaseConnection",
+        "type annotations (private conn: DatabaseConnection) match the bare word",
+        "class definition in connection.ts"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "maxretries-reads",
+      "fixture": "codebase",
+      "prompt": "In evals/fixtures/codebase, find every place that READS the maxRetries setting at runtime (file and line number). The interface declaration and the defaults object define it rather than read it; comments mentioning related names do not count.",
+      "expected_output": "3 reads: src/config/retry.ts:16 (cfg.maxRetries assignment), src/config/retry.ts:28 (loop condition), src/config/healthcheck.ts:25 (const maxRetries from env). Definitions: retry.ts:2 and :8. Prefix trap: retry.ts:22 comment mentions maxRetriesLimit.",
+      "traps": [
+        "maxRetriesLimit contains maxRetries as a prefix (bare-word match)",
+        "interface + defaults object are definitions, not reads",
+        "comment line mentions maxRetriesLimit"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "log-errors",
+      "fixture": "logrepo",
+      "prompt": "In evals/fixtures/logrepo, find the ERROR log line about connection refused (file and timestamp). Other severities that merely mention the phrase, and ERROR lines about other topics, do not count.",
+      "expected_output": "Exactly one: logs/app-2026-11-25.log:7 (02:13:47, ERROR connection refused dialing db.primary). Traps: WARN mention at 25.log:12, INFO postmortem mention at 24.log:16, ERROR lines about query timeout / OOM that are not connection-refused.",
+      "traps": [
+        "WARN line mentions connection refused (24h incident reference)",
+        "INFO line in the postmortem mentions connection refused",
+        "ERROR lines exist for other topics (query timeout, OOM)",
+        "the phrase also appears mid-line in a WARN about flapping"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "session-timeout",
+      "fixture": "ops-repo",
+      "prompt": "In evals/fixtures/ops-repo, find where the session timeout is DEFINED and what value it has. Check for conflicting definitions in environment overrides and report any inconsistency you find. Other timeouts (db, http) are unrelated.",
+      "expected_output": "Defined twice with conflicting values: config/app.yaml:10 (session block, timeout: 1800) and env/production.env:4 (SESSION_TIMEOUT=3600). A good answer reports BOTH values and flags the conflict. Reads: src/auth/session.ts:8-9. Traps: db timeout: 5000 (app.yaml:17), request_timeout: 15000 (:20), keepalive_timeout (:21), session cookie_domain/store keys.",
+      "traps": [
+        "bare word 'timeout' hits db/http timeouts with different values",
+        "SESSION_TIMEOUT env var uses a different naming convention AND a different value",
+        "session block also contains cookie_domain and store keys (same-prefix noise)"
+      ],
+      "files": []
+    }
+  ]
+}

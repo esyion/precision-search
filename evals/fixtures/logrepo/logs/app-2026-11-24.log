@@ -1,0 +1,17 @@
+2026-11-24 00:02:19 INFO  midnight maintenance started
+2026-11-24 00:02:44 INFO  vacuum completed tables=17
+2026-11-24 00:59:12 INFO  http request method=GET path=/healthz status=200
+2026-11-24 01:04:38 WARN  redis latency p99=210ms
+2026-11-24 01:07:51 INFO  job welcome-email started run=9770
+2026-11-24 01:43:58 WARN  upstream cache.internal latency rising
+2026-11-24 02:03:57 ERROR query timeout after 5000ms sql="SELECT * FROM tasks"
+2026-11-24 02:04:01 INFO  statement requeued queue=slow-queries
+2026-11-24 02:12:30 INFO  deployment v2026.11.24-rc1 rolled out
+2026-11-24 03:20:44 INFO  http request method=POST path=/login status=200
+2026-11-24 03:55:17 WARN  cert for *.taskflow.internal expires in 14 days
+2026-11-24 04:31:02 INFO  job kyc-check started run=9784
+2026-11-24 05:02:26 ERROR query timeout after 5000ms sql="SELECT * FROM audits"
+2026-11-24 05:02:27 INFO  statement requeued queue=slow-queries
+2026-11-24 06:15:09 INFO  backup uploaded size=2.1GiB
+2026-11-24 09:41:33 INFO  postmortem INC-2207 published; root cause: connection refused during cache failover
+2026-11-24 09:41:34 INFO  action items assigned to oncall

@@ -1,0 +1,21 @@
+# taskflow operations config
+# Single source of truth for runtime settings.
+
+app:
+  name: taskflow
+  port: 8080
+  log_level: info
+
+session:
+  timeout: 1800        # seconds; set to 30 minutes per SECURITY-112
+  cookie_domain: .taskflow.internal
+  store: redis
+
+db:
+  url: postgres://db.internal/taskflow
+  pool_size: 20
+  timeout: 5000
+
+http:
+  request_timeout: 15000
+  keepalive_timeout: 5000
